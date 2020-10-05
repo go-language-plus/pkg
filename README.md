@@ -1,5 +1,8 @@
 # pkg
 
+![Go](https://github.com/go-language-plus/pkg/workflows/Go/badge.svg?branch=main)
+![codecov](https://codecov.io/gh/go-language-plus/pkg/branch/main/graph/badge.svg)
+ 
 ## Install
 ```
 go get github.com/go-language-plus/pkg
