@@ -139,17 +139,24 @@ func TestStr_Int(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		s := String(tt.fields.Value)
+		if tt.fields.Builder.Base != DefaultStringBase {
+			s.SetBase(tt.fields.Builder.Base)
+		}
+
 		t.Run(tt.name, func(t *testing.T) {
-			s := String(tt.fields.Value)
-			if tt.fields.Builder.Base != DefaultStringBase {
-				s.SetBase(tt.fields.Builder.Base)
-			}
 			got, err := s.Int()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Int() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if got != tt.want {
+				t.Errorf("Int() got = %v, want %v", got, tt.want)
+			}
+		})
+
+		t.Run(tt.name, func(t *testing.T) {
+			if got := s.MustInt(); got != tt.want {
 				t.Errorf("Int() got = %v, want %v", got, tt.want)
 			}
 		})
@@ -212,15 +219,35 @@ func TestStr_Int8(t *testing.T) {
 			127,
 			false,
 		},
+		{
+			"testBase2",
+			fields{
+				Builder: Builder{Base: 2},
+				Value:   "10000",
+			},
+			16,
+			false,
+		},
 	}
 	for _, tt := range tests {
+		s := String(tt.fields.Value)
+		if tt.fields.Builder.Base != DefaultStringBase {
+			s.SetBase(tt.fields.Builder.Base)
+		}
+
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := String(tt.fields.Value).Int8()
+			got, err := s.Int8()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Int8() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if got != tt.want {
+				t.Errorf("Int8() got = %v, want %v", got, tt.want)
+			}
+		})
+
+		t.Run(tt.name, func(t *testing.T) {
+			if got := s.MustInt8(); got != tt.want {
 				t.Errorf("Int8() got = %v, want %v", got, tt.want)
 			}
 		})
@@ -265,15 +292,44 @@ func TestStr_Int16(t *testing.T) {
 			-32768,
 			false,
 		},
+		{
+			"testBase2",
+			fields{
+				Builder: Builder{Base: 2},
+				Value:   "10000",
+			},
+			16,
+			false,
+		},
+		{
+			"testBase16",
+			fields{
+				Builder: Builder{Base: 16},
+				Value:   "5000",
+			},
+			20480,
+			false,
+		},
 	}
 	for _, tt := range tests {
+		s := String(tt.fields.Value)
+		if tt.fields.Builder.Base != DefaultStringBase {
+			s.SetBase(tt.fields.Builder.Base)
+		}
+
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := String(tt.fields.Value).Int16()
+			got, err := s.Int16()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Int16() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if got != tt.want {
+				t.Errorf("Int16() got = %v, want %v", got, tt.want)
+			}
+		})
+
+		t.Run(tt.name, func(t *testing.T) {
+			if got := s.MustInt16(); got != tt.want {
 				t.Errorf("Int16() got = %v, want %v", got, tt.want)
 			}
 		})
@@ -318,15 +374,44 @@ func TestStr_Int32(t *testing.T) {
 			-2147483648,
 			false,
 		},
+		{
+			"testBase2",
+			fields{
+				Builder: Builder{Base: 2},
+				Value:   "10000",
+			},
+			16,
+			false,
+		},
+		{
+			"testBase16",
+			fields{
+				Builder: Builder{Base: 16},
+				Value:   "10000",
+			},
+			65536,
+			false,
+		},
 	}
 	for _, tt := range tests {
+		s := String(tt.fields.Value)
+		if tt.fields.Builder.Base != DefaultStringBase {
+			s.SetBase(tt.fields.Builder.Base)
+		}
+
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := String(tt.fields.Value).Int32()
+			got, err := s.Int32()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Int32() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if got != tt.want {
+				t.Errorf("Int32() got = %v, want %v", got, tt.want)
+			}
+		})
+
+		t.Run(tt.name, func(t *testing.T) {
+			if got := s.MustInt32(); got != tt.want {
 				t.Errorf("Int32() got = %v, want %v", got, tt.want)
 			}
 		})
@@ -371,15 +456,44 @@ func TestStr_Int64(t *testing.T) {
 			9223372036854775807,
 			true,
 		},
+		{
+			"testBase2",
+			fields{
+				Builder: Builder{Base: 2},
+				Value:   "10000",
+			},
+			16,
+			false,
+		},
+		{
+			"testBase16",
+			fields{
+				Builder: Builder{Base: 16},
+				Value:   "10000",
+			},
+			65536,
+			false,
+		},
 	}
 	for _, tt := range tests {
+		s := String(tt.fields.Value)
+		if tt.fields.Builder.Base != DefaultStringBase {
+			s.SetBase(tt.fields.Builder.Base)
+		}
+
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := String(tt.fields.Value).Int64()
+			got, err := s.Int64()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Int64() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if got != tt.want {
+				t.Errorf("Int64() got = %v, want %v", got, tt.want)
+			}
+		})
+
+		t.Run(tt.name, func(t *testing.T) {
+			if got := s.MustInt64(); got != tt.want {
 				t.Errorf("Int64() got = %v, want %v", got, tt.want)
 			}
 		})
