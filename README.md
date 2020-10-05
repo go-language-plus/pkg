@@ -3,6 +3,10 @@
 ![Go](https://github.com/go-language-plus/pkg/workflows/Go/badge.svg?branch=main)
 ![codecov](https://codecov.io/gh/go-language-plus/pkg/branch/main/graph/badge.svg)
  
+Some explorations of the best practices of the Go language, and simple unified packaging.
+
+This package is just to do some research, and then do some simple packaging based on the standard package or some other operations to unify the troublesome things to facilitate calling, thereby reducing the mental burden. (In other words, yes, this is a toy kit.)
+
 ## Install
 ```
 go get github.com/go-language-plus/pkg
@@ -21,22 +25,22 @@ Some examples are list as follow:
 // string to int
 s := string.String("123")
 
-// way in err check
-resInt, err := s.Int()
+resInt, err := s.Int() // // way in err check
 if err != nil {
-	panic(err)
+    panic(err)
 }
 fmt.Printf("%T, %v\n", resInt, resInt) // int, 123
 
-// way without err check
-resInt2 := s.MustInt()
+resInt2 := s.MustInt() // // way without err check
 fmt.Printf("%T, %v\n", resInt2, resInt2) // int, 123
 
 // int to string
 var i int32 = 1000
 resStr := string.Int(int64(i)).String()
 fmt.Printf("%T, %v\n", resStr, resStr) // string, 1000
-
+```
+The default `base` parameter above is decimal, if you want to modify the `base` number:
+```go
 // change default base
 resI := string.String("123").SetBase(16).MustInt()
 fmt.Printf("%T, %v\n", resI, resI) // int, 291
@@ -44,3 +48,4 @@ fmt.Printf("%T, %v\n", resI, resI) // int, 291
 resS := string.Int(int64(i)).SetBase(16).String()
 fmt.Printf("%T, %v\n", resS, resS) // string, 3e8
 ```
+
