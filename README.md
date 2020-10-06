@@ -1,10 +1,10 @@
 # pkg
 
-[![PkgGoDev](https://pkg.go.dev/badge/go-language-plus/pkg)](https://pkg.go.dev/go-language-plus/pkg)
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/go-language-plus/pkg)](https://pkg.go.dev/github.com/go-language-plus/pkg)
 ![Go](https://github.com/go-language-plus/pkg/workflows/Go/badge.svg?branch=main)
 ![codecov](https://codecov.io/gh/go-language-plus/pkg/branch/main/graph/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/go-language-plus/pkg)](https://goreportcard.com/report/github.com/go-language-plus/pkg)
- 
+
 Some explorations of the best practices of the Go language, and simple unified packaging.
 
 This package is just to do some research, and then do some simple packaging based on the standard package or some other operations to unify the troublesome things to facilitate calling, thereby reducing the mental burden. (In other words, yes, this is a toy kit.)
