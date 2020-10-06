@@ -1,7 +1,9 @@
 # pkg
 
+[![PkgGoDev](https://pkg.go.dev/badge/go-language-plus/pkg)](https://pkg.go.dev/go-language-plus/pkg)
 ![Go](https://github.com/go-language-plus/pkg/workflows/Go/badge.svg?branch=main)
 ![codecov](https://codecov.io/gh/go-language-plus/pkg/branch/main/graph/badge.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/go-language-plus/pkg)](https://goreportcard.com/report/github.com/go-language-plus/pkg)
  
 Some explorations of the best practices of the Go language, and simple unified packaging.
 
@@ -15,7 +17,7 @@ go get github.com/go-language-plus/pkg
 ## Usage
 
 ### String
-import string package:
+Import string package:
 ```go
 import "github.com/go-language-plus/pkg/string"
 ```

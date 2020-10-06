@@ -2,6 +2,7 @@ package string
 
 import "strconv"
 
+// Integer  the base struct of integer for type conversion
 type Integer struct {
 	Builder
 	Value int64
