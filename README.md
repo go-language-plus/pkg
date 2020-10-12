@@ -53,9 +53,11 @@ fmt.Printf("%T, %v\n", resS, resS) // string, 3e8
 String package encapsulates the conversion between `string` and `[]byte`. **Note**: This conversion is not safe, you must know what you are doing, otherwise only use it when there is only read-only operation. If you don’t understand, don’t use it, just use the standard conversion.
 ```go
 // string to []byte
-string.ByteString("hello").SliceByte()
+b := string.ByteString("hello").SliceByte()
+fmt.Printf("%T, %v\n", b, b) // []uint8, [104 101 108 108 111]
 
 // []byte to string
-string.SliceByte([]byte{118, 97, 108, 117, 101, 49}).String()
+bs := string.SliceByte([]byte{104, 101, 108, 108, 111}).String()
+fmt.Printf("%T, %v\n", bs, bs) // string, hello
 ```
 
