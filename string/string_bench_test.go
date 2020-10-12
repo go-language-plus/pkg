@@ -10,9 +10,13 @@ import (
 // goos: darwin
 // goarch: amd64
 // pkg: github.com/go-language-plus/pkg/string
-// BenchmarkAtoi-16                136491384                9.04 ns/op            0 B/op          0 allocs/op
-// BenchmarkStrconvParseInt-16     60729482                20.1 ns/op             0 B/op          0 allocs/op
-// BenchmarkStringToInt-16         98901199                12.2 ns/op             0 B/op          0 allocs/op
+// BenchmarkAtoi-16                        129234172                9.24 ns/op            0 B/op          0 allocs/op
+// BenchmarkStrconvParseInt-16             57918210                21.0 ns/op             0 B/op          0 allocs/op
+// BenchmarkStringToInt-16                 91119936                12.7 ns/op             0 B/op          0 allocs/op
+// BenchmarkStringToSliceByte-16           220481298                5.58 ns/op            0 B/op          0 allocs/op
+// BenchmarkStringToSliceByteUnsafe-16     1000000000               0.261 ns/op           0 B/op          0 allocs/op
+// BenchmarkSliceByteToString-16           298688124                3.80 ns/op            0 B/op          0 allocs/op
+// BenchmarkSliceByteToStringUnsafe-16     1000000000               0.502 ns/op           0 B/op          0 allocs/op
 // PASS
 // =========================================================================================================
 
@@ -50,6 +54,40 @@ func BenchmarkStringToInt(b *testing.B) {
 		if err != nil {
 			b.Error(err)
 		}
+	}
+	b.StopTimer()
+}
+
+func BenchmarkStringToSliceByte(b *testing.B) {
+	b.ResetTimer()
+	for idx := 0; idx < b.N; idx++ {
+		_ = []byte(s)
+	}
+	b.StopTimer()
+}
+
+func BenchmarkStringToSliceByteUnsafe(b *testing.B) {
+	b.ResetTimer()
+	for idx := 0; idx < b.N; idx++ {
+		_ = ByteString(s).SliceByte()
+	}
+	b.StopTimer()
+}
+
+var bs = []byte{118, 97, 108, 117, 101, 49}
+
+func BenchmarkSliceByteToString(b *testing.B) {
+	b.ResetTimer()
+	for idx := 0; idx < b.N; idx++ {
+		_ = string(bs)
+	}
+	b.StopTimer()
+}
+
+func BenchmarkSliceByteToStringUnsafe(b *testing.B) {
+	b.ResetTimer()
+	for idx := 0; idx < b.N; idx++ {
+		_ = SliceByte(bs).String()
 	}
 	b.StopTimer()
 }

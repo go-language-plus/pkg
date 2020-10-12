@@ -50,4 +50,12 @@ fmt.Printf("%T, %v\n", resI, resI) // int, 291
 resS := string.Int(int64(i)).SetBase(16).String()
 fmt.Printf("%T, %v\n", resS, resS) // string, 3e8
 ```
+String package encapsulates the conversion between `string` and `[]byte`. **Note**: This conversion is not safe, you must know what you are doing, otherwise only use it when there is only read-only operation. If you don’t understand, don’t use it, just use the standard conversion.
+```go
+// string to []byte
+string.ByteString("hello").SliceByte()
+
+// []byte to string
+string.SliceByte([]byte{118, 97, 108, 117, 101, 49}).String()
+```
 
