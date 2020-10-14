@@ -1,4 +1,4 @@
-package string
+package stringp
 
 import (
 	"strconv"
@@ -9,7 +9,7 @@ import (
 // =========================================================================================================
 // goos: darwin
 // goarch: amd64
-// pkg: github.com/go-language-plus/pkg/string
+// pkg: github.com/go-language-plus/pkg/stringp
 // BenchmarkAtoi-16                        129234172                9.24 ns/op            0 B/op          0 allocs/op
 // BenchmarkStrconvParseInt-16             57918210                21.0 ns/op             0 B/op          0 allocs/op
 // BenchmarkStringToInt-16                 91119936                12.7 ns/op             0 B/op          0 allocs/op

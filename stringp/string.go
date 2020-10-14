@@ -1,4 +1,4 @@
-package string
+package stringp
 
 // DefaultStringBase if not set during type conversion, the default is decimal
 const DefaultStringBase = 10
