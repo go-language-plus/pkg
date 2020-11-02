@@ -16,5 +16,6 @@
 
 coverage.txt
 main.go
+test.go
 
 .idea/

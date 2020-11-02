@@ -1,3 +1,4 @@
+// Package stringp some string conversion related packages
 package stringp
 
 // DefaultStringBase if not set during type conversion, the default is decimal
