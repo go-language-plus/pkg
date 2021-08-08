@@ -18,18 +18,18 @@ go get -u github.com/go-language-plus/pkg
 
 In order to make some package names not cause confusion and conflict, we add a "p" (can be understood as the abbreviation of "plus").
 
-### Stringp
+### Str
 Some string conversion related packages.
 
 Import package:
 ```go
-import "github.com/go-language-plus/pkg/stringp"
+import "github.com/go-language-plus/pkg/str"
 ```
 
 Some examples are list as follows:
 ```go
 // string to int
-s := stringp.String("123")
+s := str.String("123")
 
 resInt, err := s.Int() // // way in err check
 if err != nil {
@@ -42,26 +42,26 @@ fmt.Printf("%T, %v\n", resInt2, resInt2) // int, 123
 
 // int to string
 var i int32 = 1000
-resStr := stringp.Int(int64(i)).String()
+resStr := str.Int32(i).String()
 fmt.Printf("%T, %v\n", resStr, resStr) // string, 1000
 ```
 The default `base` parameter above is decimal, if you want to modify the `base` number:
 ```go
 // change default base
-resI := stringp.String("123").SetBase(16).MustInt()
+resI := str.String("123").Base(16).MustInt()
 fmt.Printf("%T, %v\n", resI, resI) // int, 291
 
-resS := stringp.Int(int64(i)).SetBase(16).String()
+resS := str.Int32(i).Base(16).String()
 fmt.Printf("%T, %v\n", resS, resS) // string, 3e8
 ```
 String package encapsulates the conversion between `string` and `[]byte`. **Note**: This conversion is not safe, you must know what you are doing, otherwise only use it when there is only read-only operation. If you don’t understand, don’t use it, just use the standard conversion.
 ```go
 // string to []byte
-b := stringp.ByteString("hello").SliceByte()
+b := str.UnsafeString("hello").Bytes()
 fmt.Printf("%T, %v\n", b, b) // []uint8, [104 101 108 108 111]
 
 // []byte to string
-bs := stringp.SliceByte([]byte{104, 101, 108, 108, 111}).String()
+bs := str.Bytes([]byte{104, 101, 108, 108, 111}).String()
 fmt.Printf("%T, %v\n", bs, bs) // string, hello
 ```
 
