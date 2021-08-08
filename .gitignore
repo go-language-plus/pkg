@@ -19,3 +19,4 @@ main.go
 test.go
 
 .idea/
+.vscode/

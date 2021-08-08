@@ -1,4 +1,4 @@
-package stringp
+package str
 
 import (
 	"strconv"
@@ -6,27 +6,32 @@ import (
 
 // Str the base struct of string for type conversion
 type Str struct {
-	Builder
+	Options
 	Value string
 }
 
-// SetBase set Base to cover default Base setting
-func (s *Str) SetBase(base int) *Str {
-	s.Base = base
+// Base set Base to cover default Base setting
+func (s *Str) Base(base int) *Str {
+	s.base = base
 	return s
+}
+
+// Unsafe convert to unsafe string type byteString
+func (s *Str) Unsafe() *ByteString {
+	return UnsafeString(s.Value)
 }
 
 // String return a pointer Str struct instance
 func String(s string) *Str {
 	return &Str{
-		Builder{Base: DefaultStringBase},
+		Options{base: DefaultIntBase},
 		s,
 	}
 }
 
 // Int convert to int
 func (s *Str) Int() (int, error) {
-	if s.Base == DefaultStringBase {
+	if s.base == DefaultIntBase {
 		return strconv.Atoi(s.Value)
 	}
 
@@ -42,7 +47,7 @@ func (s *Str) MustInt() int {
 
 // Int8 convert to int8
 func (s *Str) Int8() (int8, error) {
-	if s.Base == DefaultStringBase {
+	if s.base == DefaultIntBase {
 		i, err := strconv.Atoi(s.Value)
 		return int8(i), err
 	}
@@ -59,12 +64,12 @@ func (s *Str) MustInt8() int8 {
 
 // Int16 convert to int16
 func (s *Str) Int16() (int16, error) {
-	if s.Base == DefaultStringBase {
+	if s.base == DefaultIntBase {
 		i, err := strconv.Atoi(s.Value)
 		return int16(i), err
 	}
 
-	i64, err := s.parseInt(s.Value, 32)
+	i64, err := s.parseInt(s.Value, 16)
 	return int16(i64), err
 }
 
@@ -76,7 +81,7 @@ func (s *Str) MustInt16() int16 {
 
 // Int32 convert to int32
 func (s *Str) Int32() (int32, error) {
-	if s.Base == DefaultStringBase {
+	if s.base == DefaultIntBase {
 		i, err := strconv.Atoi(s.Value)
 		return int32(i), err
 	}
@@ -93,7 +98,7 @@ func (s *Str) MustInt32() int32 {
 
 // Int64 convert to int64
 func (s *Str) Int64() (int64, error) {
-	if s.Base == DefaultStringBase {
+	if s.base == DefaultIntBase {
 		i, err := strconv.Atoi(s.Value)
 		return int64(i), err
 	}
@@ -109,5 +114,5 @@ func (s *Str) MustInt64() int64 {
 
 // parseInt call strconv.ParseInt
 func (s *Str) parseInt(str string, bitSize int) (int64, error) {
-	return strconv.ParseInt(str, s.Base, bitSize)
+	return strconv.ParseInt(str, s.base, bitSize)
 }

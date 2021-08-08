@@ -1,4 +1,4 @@
-package stringp
+package str
 
 import (
 	"reflect"
@@ -6,9 +6,9 @@ import (
 	"unsafe"
 )
 
-func Test_byteString_SliceByte(t *testing.T) {
+func TestByteString_Bytes(t *testing.T) {
 	type fields struct {
-		Str unsafe.Pointer
+		str unsafe.Pointer
 		len int
 		cap int
 	}
@@ -25,8 +25,9 @@ func Test_byteString_SliceByte(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := ByteString("value1").SliceByte(); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("SliceByte() = %v, want %v", got, tt.want)
+			b := UnsafeString("value1")
+			if got := b.Bytes(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("ByteString.Bytes() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -49,9 +50,9 @@ func Test_sliceByte_String(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			b := []byte{118, 97, 108, 117, 101, 49}
-			if got := SliceByte(b).String(); got != tt.want {
-				t.Errorf("String() = %v, want %v", got, tt.want)
+			sb := Bytes([]byte{118, 97, 108, 117, 101, 49})
+			if got := sb.String(); got != tt.want {
+				t.Errorf("sliceByte.String() = %v, want %v", got, tt.want)
 			}
 		})
 	}

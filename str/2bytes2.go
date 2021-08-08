@@ -1,10 +1,10 @@
-package stringp
+package str
 
 import (
 	"unsafe"
 )
 
-type byteString struct {
+type ByteString struct {
 	str unsafe.Pointer
 	len int
 	cap int
@@ -17,9 +17,9 @@ type byteStringHeader struct {
 
 // ByteString return a pointer ByteString struct instance
 // Note: Independent ByteString comes out because it is special
-func ByteString(s string) *byteString {
+func UnsafeString(s string) *ByteString {
 	str := (*byteStringHeader)(unsafe.Pointer(&s))
-	ret := byteString{
+	ret := ByteString{
 		str: str.str,
 		len: str.len,
 		cap: str.len,
@@ -27,8 +27,8 @@ func ByteString(s string) *byteString {
 	return &ret
 }
 
-// SliceByte convert string to []byte
-func (b *byteString) SliceByte() []byte {
+// Bytes convert string to []byte
+func (b *ByteString) Bytes() []byte {
 	return *(*[]byte)(unsafe.Pointer(b))
 }
 
@@ -36,8 +36,8 @@ type sliceByte struct {
 	data *[]byte
 }
 
-// SliceByte return a pointer SliceByte struct instance
-func SliceByte(b []byte) *sliceByte {
+// Bytes return a pointer SliceByte struct instance
+func Bytes(b []byte) *sliceByte {
 	return &sliceByte{
 		data: &b,
 	}

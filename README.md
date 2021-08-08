@@ -19,7 +19,9 @@ go get -u github.com/go-language-plus/pkg
 In order to make some package names not cause confusion and conflict, we add a "p" (can be understood as the abbreviation of "plus").
 
 ### Stringp
-Import string package:
+Some string conversion related packages.
+
+Import package:
 ```go
 import "github.com/go-language-plus/pkg/stringp"
 ```
@@ -63,3 +65,19 @@ bs := stringp.SliceByte([]byte{104, 101, 108, 108, 111}).String()
 fmt.Printf("%T, %v\n", bs, bs) // string, hello
 ```
 
+### Timep
+A toolkit for the standard time package. While being compatible with time, some encapsulation of operations is added.
+
+Import package:
+```go
+import "github.com/go-language-plus/pkg/timep"
+```
+
+Examples:
+```go
+t1 := timep.Now().Format()
+fmt.Println(t1) // 2020-11-03 04:28:34
+
+t2 := timep.Date(2009, time.November, 10, 23, 0, 0, 0, timep.LocationUTC).Location("Asia/Shanghai").Layout(time.RFC1123).Format()
+fmt.Println(t2) // Wed, 11 Nov 2009 07:00:00 CST
+```
