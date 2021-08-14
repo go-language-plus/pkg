@@ -1,10 +1,10 @@
-// Package timep a toolkit for the standard time package
-package timep
+// Package dt a toolkit for the standard time package
+package dt
 
 import "time"
 
 const (
-	// FormatDefault  default output format in TimeP package
+	// FormatDefault  default output format in dt package
 	FormatDefault = "2006-01-02 15:04:05"
 )
 
@@ -36,18 +36,18 @@ var (
 	LocationLocal = time.Local.String()
 )
 
-// TimeP struct include time.Time and conversion related configuration
+// DateTime struct include time.Time and conversion related configuration
 // TimeLocation is not the time.Time's location; time.Time has a loc which is the real location setting from time package
 // TimeFormats is the target format if you call Format()
-type TimeP struct {
+type DateTime struct {
 	time.Time
 	TimeLocation *time.Location
 	TimeFormats  string
 }
 
-// NewTimeP returns the TimeP struct
-func NewTimeP(t time.Time) *TimeP {
-	return &TimeP{
+// NewDateTime returns the TimeP struct
+func NewDateTime(t time.Time) *DateTime {
+	return &DateTime{
 		t,
 		t.Location(),
 		FormatDefault,
@@ -55,21 +55,21 @@ func NewTimeP(t time.Time) *TimeP {
 }
 
 // Now get TimeP struct for now time
-func Now() *TimeP {
-	return NewTimeP(time.Now())
+func Now() *DateTime {
+	return NewDateTime(time.Now())
 }
 
-// Date get TimeP struct for date time by parameter
-func Date(year int, month time.Month, day int, hour int, min int, sec int, nsec int, locString string) *TimeP {
+// Date get DateTime struct for date time by parameter
+func Date(year int, month time.Month, day int, hour int, min int, sec int, nsec int, locString string) *DateTime {
 	loc, err := time.LoadLocation(locString)
 	if err != nil {
 		loc = time.UTC
 	}
-	return NewTimeP(time.Date(year, month, day, hour, min, sec, nsec, loc))
+	return NewDateTime(time.Date(year, month, day, hour, min, sec, nsec, loc))
 }
 
 // Location set the target location you want to convert
-func (t *TimeP) Location(s string) *TimeP {
+func (t *DateTime) Location(s string) *DateTime {
 	loc, err := time.LoadLocation(s)
 	if err == nil {
 		t.TimeLocation = loc
@@ -78,12 +78,12 @@ func (t *TimeP) Location(s string) *TimeP {
 }
 
 // Layout set the format layout you want to get
-func (t *TimeP) Layout(s string) *TimeP {
+func (t *DateTime) Layout(s string) *DateTime {
 	t.TimeFormats = s
 	return t
 }
 
 // Format Get the string in the target format (TimeP.TimeFormats) and location (TimeP.TimeLocation)
-func (t *TimeP) Format() string {
+func (t *DateTime) Format() string {
 	return t.In(t.TimeLocation).Format(t.TimeFormats)
 }
